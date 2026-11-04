@@ -9,21 +9,32 @@ function sugerir() {
 
 function SugestaoModo() {
   const [sugestao, setSugestao] = useState(sugerir)
+  const { modo, confianca } = sugestao
 
   return (
-    <section className="cartao sugestao" style={{ '--cor-modo': sugestao.modo.cor }}>
-      <h2>Sugestão inteligente</h2>
-      <p className="sugestao-texto">
-        A câmera identificou o contexto e sugere o modo{' '}
-        <strong>{sugestao.modo.nome}</strong> — {sugestao.modo.descricao}
+    <section
+      className="rounded-xl border-l-4 bg-white p-6 shadow-sm"
+      style={{ borderColor: modo.cor }}
+      aria-labelledby="sugestao-titulo"
+    >
+      <h2 id="sugestao-titulo" className="mb-2 text-xl font-bold">
+        Sugestão inteligente
+      </h2>
+      <p className="text-slate-700">
+        A câmera identificou o contexto e sugere o modo <strong>{modo.nome}</strong> — {modo.descricao}
       </p>
-      <div className="sugestao-confianca">
-        <div className="barra">
-          <div className="barra-preenchida" style={{ width: `${sugestao.confianca}%` }} />
+      <div className="my-3 flex items-center gap-3 text-sm text-slate-500">
+        <div className="h-2 flex-1 overflow-hidden rounded bg-slate-200">
+          <div className="h-full" style={{ width: `${confianca}%`, background: modo.cor }} />
         </div>
-        <span>{sugestao.confianca}% de confiança</span>
+        <span>{confianca}% de confiança</span>
       </div>
-      <button type="button" onClick={() => setSugestao(sugerir())}>
+      <button
+        type="button"
+        onClick={() => setSugestao(sugerir())}
+        className="rounded-lg border px-3 py-1.5 text-sm font-semibold"
+        style={{ borderColor: modo.cor, color: modo.cor }}
+      >
         Nova sugestão
       </button>
     </section>

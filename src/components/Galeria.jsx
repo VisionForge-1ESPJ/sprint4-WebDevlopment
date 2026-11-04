@@ -21,23 +21,26 @@ function Galeria({ capturas, albuns, onExcluir, onMoverAlbum }) {
     : capturas
 
   return (
-    <section className="cartao galeria">
-      <h2>Central de conteúdo ({capturas.length})</h2>
+    <section className="rounded-xl bg-white p-6 shadow-sm" aria-labelledby="galeria-app-titulo">
+      <h2 id="galeria-app-titulo" className="mb-3 text-xl font-bold">
+        Central de conteúdo ({capturas.length})
+      </h2>
 
       <input
         type="search"
+        aria-label="Buscar capturas"
         placeholder="Buscar por modo, álbum ou origem..."
         value={busca}
         onChange={(e) => setBusca(e.target.value)}
-        className="galeria-busca"
+        className="mb-4 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
       />
 
       {capturas.length === 0 ? (
-        <p className="vazio">Nenhuma captura ainda. Tire a primeira foto ao lado.</p>
+        <p className="text-gray-500">Nenhuma captura ainda. Tire a primeira foto ao lado.</p>
       ) : filtradas.length === 0 ? (
-        <p className="vazio">Nenhuma captura encontrada para "{busca}".</p>
+        <p className="text-gray-500">Nenhuma captura encontrada para "{busca}".</p>
       ) : (
-        <ul className="galeria-grid">
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
           {filtradas.map((captura) => (
             <CapturaItem
               key={captura.id}

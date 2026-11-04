@@ -1,5 +1,14 @@
 import modos from '../data/modos'
 
+function Item({ rotulo, valor }) {
+  return (
+    <div className="flex flex-col gap-1 rounded-lg bg-gray-50 p-3">
+      <span className="text-xs text-gray-500">{rotulo}</span>
+      <strong>{valor}</strong>
+    </div>
+  )
+}
+
 function Estatisticas({ capturas }) {
   const total = capturas.length
 
@@ -19,38 +28,25 @@ function Estatisticas({ capturas }) {
   const espacoKb = Math.round(capturas.reduce((soma, c) => soma + c.imagem.length, 0) / 1024)
 
   return (
-    <section className="cartao estatisticas">
-      <h2>Estatísticas</h2>
-      <div className="estatisticas-grid">
-        <div className="estatistica-item">
-          <span>Total de capturas</span>
-          <strong>{total}</strong>
-        </div>
-        <div className="estatistica-item">
-          <span>Modo mais usado</span>
-          <strong>{total > 0 ? modoMaisUsado.nome : '—'}</strong>
-        </div>
-        <div className="estatistica-item">
-          <span>Média por dia</span>
-          <strong>{mediaPorDia}</strong>
-        </div>
-        <div className="estatistica-item">
-          <span>Espaço usado</span>
-          <strong>{espacoKb} KB</strong>
-        </div>
+    <section className="rounded-xl bg-white p-6 shadow-sm" aria-labelledby="estat-titulo">
+      <h2 id="estat-titulo" className="mb-3 text-xl font-bold">
+        Estatísticas
+      </h2>
+      <div className="mb-5 grid grid-cols-2 gap-3">
+        <Item rotulo="Total de capturas" valor={total} />
+        <Item rotulo="Modo mais usado" valor={total > 0 ? modoMaisUsado.nome : '—'} />
+        <Item rotulo="Média por dia" valor={mediaPorDia} />
+        <Item rotulo="Espaço usado" valor={`${espacoKb} KB`} />
       </div>
 
-      <div className="estatisticas-barras">
+      <div className="flex flex-col gap-2">
         {contagemPorModo.map((modo) => {
           const percentual = total > 0 ? Math.round((modo.quantidade / total) * 100) : 0
           return (
-            <div key={modo.id} className="estatistica-linha">
+            <div key={modo.id} className="grid grid-cols-[70px_1fr_40px] items-center gap-2.5 text-sm text-gray-600">
               <span>{modo.nome}</span>
-              <div className="barra">
-                <div
-                  className="barra-preenchida"
-                  style={{ width: `${percentual}%`, '--cor-modo': modo.cor }}
-                />
+              <div className="h-2 overflow-hidden rounded bg-gray-200">
+                <div className="h-full" style={{ width: `${percentual}%`, background: modo.cor }} />
               </div>
               <span>{percentual}%</span>
             </div>
