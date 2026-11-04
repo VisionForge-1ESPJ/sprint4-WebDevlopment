@@ -11,7 +11,7 @@ Aplicação em **React** com landing page, rotas públicas e privadas, hooks nat
 - **Autenticação simulada** (cadastro e login) com contexto React
 - **Hooks customizados** em `src/hooks`: `useLocalStorage`, `useCapturas`, `useCamera`, `useInspiracoes`, `useContato`, `useAuth`
 - **Tailwind CSS v4** substituindo o CSS puro
-- **APIs**: Lorem Picsum (fotos de referência de enquadramento por modo, com favoritos) e JSONPlaceholder (envio mockado do formulário de contato)
+- **APIs**: Wikimedia Commons (fotos de referência de enquadramento por tema do modo, com favoritos) e JSONPlaceholder (envio mockado do formulário de contato)
 
 ## Contexto do desafio
 
@@ -39,7 +39,7 @@ O JOVI Lens é um protótipo de câmera inteligente e contextual. Em vez de um �
 - JavaScript (ES6+)
 - `localStorage` (Web Storage API)
 - `MediaDevices.getUserMedia` (API de câmera do navegador) e `Canvas` para captura/processamento de imagem
-- APIs consumidas: [Lorem Picsum](https://picsum.photos/) (API pública de terceiros) e [JSONPlaceholder](https://jsonplaceholder.typicode.com/) (API mockada)
+- APIs consumidas: [Wikimedia Commons](https://commons.wikimedia.org/w/api.php) (API pública de terceiros) e [JSONPlaceholder](https://jsonplaceholder.typicode.com/) (API mockada)
 - Git + GitHub e deploy na [Vercel](https://vercel.com/)
 
 ## Como instalar as dependências
@@ -71,7 +71,7 @@ npm run preview
 
 ## Como executar os servidores
 
-O projeto **não possui back-end próprio**: não há servidor para subir além do `npm run dev`. Os dados ficam no `localStorage` do navegador e as APIs consumidas (Lorem Picsum e JSONPlaceholder) são externas e públicas, sem chave de acesso. É necessário ter conexão com a internet para carregar as inspirações e enviar o formulário de contato.
+O projeto **não possui back-end próprio**: não há servidor para subir além do `npm run dev`. Os dados ficam no `localStorage` do navegador e as APIs consumidas (Wikimedia Commons e JSONPlaceholder) são externas e públicas, sem chave de acesso. É necessário ter conexão com a internet para carregar as inspirações e enviar o formulário de contato.
 
 ## Rotas da aplicação
 

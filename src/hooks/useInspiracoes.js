@@ -1,11 +1,35 @@
 import { useCallback, useEffect, useState } from 'react'
 
-// API pública Lorem Picsum (sem chave): lista fotos de fotógrafos reais
-const URL_BASE = 'https://picsum.photos/v2/list'
+// API pública Wikimedia Commons (sem chave): busca fotos reais por tema
+const URL_BASE = 'https://commons.wikimedia.org/w/api.php'
 const POR_PAGINA = 6
 
-// Cada modo da câmera usa uma página diferente, gerando referências distintas
-const PAGINA_POR_MODO = { estudo: 3, social: 7, perfil: 12 }
+// Termo de busca de cada modo da câmera
+const BUSCA_POR_MODO = {
+  estudo: 'students studying',
+  social: 'group of students friends campus',
+  perfil: 'headshot student portrait',
+}
+
+function montarUrl(modoId) {
+  const params = new URLSearchParams({
+    action: 'query',
+    generator: 'search',
+    gsrsearch: `${BUSCA_POR_MODO[modoId] ?? 'students'} filetype:bitmap`,
+    gsrnamespace: '6',
+    gsrlimit: String(POR_PAGINA),
+    prop: 'imageinfo',
+    iiprop: 'url',
+    iiurlwidth: '400',
+    format: 'json',
+    origin: '*',
+  })
+  return `${URL_BASE}?${params}`
+}
+
+function limparTitulo(titulo) {
+  return titulo.replace(/^File:/, '').replace(/\.[a-z]+$/i, '')
+}
 
 // Busca fotos de referência (inspiração de enquadramento) para o modo escolhido
 function useInspiracoes(modoId) {
@@ -21,18 +45,18 @@ function useInspiracoes(modoId) {
       setCarregando(true)
       setErro(false)
       try {
-        const pagina = PAGINA_POR_MODO[modoId] ?? 1
-        const resposta = await fetch(`${URL_BASE}?page=${pagina}&limit=${POR_PAGINA}`, {
-          signal: controle.signal,
-        })
+        const resposta = await fetch(montarUrl(modoId), { signal: controle.signal })
         if (!resposta.ok) throw new Error('Falha na API')
         const dados = await resposta.json()
+        const paginas = Object.values(dados.query?.pages ?? {})
+          .filter((p) => p.imageinfo?.[0]?.thumburl)
+          .sort((a, b) => a.index - b.index)
         setFotos(
-          dados.map((f) => ({
-            id: f.id,
-            autor: f.author,
-            link: f.url,
-            imagem: `https://picsum.photos/id/${f.id}/400/300`,
+          paginas.map((p) => ({
+            id: String(p.pageid),
+            titulo: limparTitulo(p.title),
+            link: p.imageinfo[0].descriptionurl,
+            imagem: p.imageinfo[0].thumburl,
           })),
         )
       } catch (e) {

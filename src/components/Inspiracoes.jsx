@@ -20,7 +20,7 @@ function Inspiracoes() {
         Inspirações de enquadramento
       </h2>
       <p className="mb-3 text-sm text-slate-500">
-        Fotos de referência de fotógrafos reais (API Lorem Picsum) para você se inspirar antes de capturar no modo{' '}
+        Fotos de referência do Wikimedia Commons (API pública) para você se inspirar antes de capturar no modo{' '}
         <strong style={{ color: modo.cor }}>{modo.nome}</strong>.
       </p>
 
@@ -53,7 +53,11 @@ function Inspiracoes() {
         </p>
       )}
 
-      {!carregando && !erro && (
+      {!carregando && !erro && fotos.length === 0 && (
+        <p className="text-sm text-slate-500">Nenhuma referência encontrada para este modo.</p>
+      )}
+
+      {!carregando && !erro && fotos.length > 0 && (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {fotos.map((foto) => {
             const favorito = favoritos.includes(foto.id)
@@ -61,12 +65,20 @@ function Inspiracoes() {
               <li key={foto.id} className="overflow-hidden rounded-lg bg-gray-50">
                 <img
                   src={foto.imagem}
-                  alt={`Foto de referência de ${foto.autor}`}
+                  alt={foto.titulo}
                   loading="lazy"
                   className="aspect-4/3 w-full object-cover"
                 />
                 <div className="flex items-center justify-between gap-1 p-2">
-                  <span className="truncate text-xs text-slate-600">{foto.autor}</span>
+                  <a
+                    href={foto.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={foto.titulo}
+                    className="truncate text-xs text-slate-600 underline"
+                  >
+                    {foto.titulo}
+                  </a>
                   <button
                     type="button"
                     onClick={() => alternarFavorito(foto.id)}
