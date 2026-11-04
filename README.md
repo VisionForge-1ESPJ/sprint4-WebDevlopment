@@ -1,8 +1,17 @@
 # JOVI Lens — Câmera Contextual para Estudantes
 
-Projeto da Sprint 3 da disciplina **Web Development** — FIAP, Engenharia de Software (Bacharelado), 2º semestre.
+Projeto das Sprints 3 e 4 (entrega conjunta de **Web Development** e **Front-End Design**) — FIAP, Engenharia de Software (Bacharelado), 2º semestre.
 
-Migração de um protótipo estático para uma aplicação em **React**, com componentes funcionais organizados em estrutura pai → filho, persistência de dados via `localStorage` e uso de operações matemáticas (`Math`) para estatísticas de uso.
+Aplicação em **React** com landing page, rotas públicas e privadas, hooks nativos e customizados, **Tailwind CSS**, consumo de APIs e persistência via `localStorage`.
+
+## Sprint 4 — o que foi adicionado
+
+- **Landing page** (`/`) com as seções A Solução, Público-Alvo, Galeria, Nossa Equipe e Contato (HTML semântico, CSS Grid e layout responsivo)
+- **Rotas** com React Router: públicas (`/`, `/login`) e privada (`/app`, protegida por `ProtectedRoute`)
+- **Autenticação simulada** (cadastro e login) com contexto React
+- **Hooks customizados** em `src/hooks`: `useLocalStorage`, `useCapturas`, `useCamera`, `useInspiracoes`, `useContato`, `useAuth`
+- **Tailwind CSS v4** substituindo o CSS puro
+- **APIs**: Lorem Picsum (fotos de referência de enquadramento por modo, com favoritos) e JSONPlaceholder (envio mockado do formulário de contato)
 
 ## Contexto do desafio
 
@@ -26,9 +35,10 @@ O JOVI Lens é um protótipo de câmera inteligente e contextual. Em vez de um �
 - [React 19](https://react.dev/)
 - [Vite](https://vite.dev/) como bundler e servidor de desenvolvimento
 - JavaScript (ES6+)
-- CSS puro
+- Tailwind CSS 4 e React Router
 - `localStorage` (Web Storage API)
 - `MediaDevices.getUserMedia` (API de câmera do navegador) e `Canvas` para captura/processamento de imagem
+- APIs: [Lorem Picsum](https://picsum.photos/) e [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
 - Deploy na [Vercel](https://vercel.com/)
 
 ## Como instalar as dependências
@@ -60,9 +70,14 @@ npm run preview
 
 ## Usuários e senhas de teste
 
-Este projeto **não possui autenticação/login** — todos os dados ficam salvos apenas no `localStorage` do próprio navegador de quem está usando, então não há usuários ou senhas necessários para testar.
+A autenticação é simulada (dados no `localStorage`). Use a conta de teste ou crie uma na tela de login:
+
+- E-mail: `aluno@jovi.com`
+- Senha: `jovi123`
 
 ## Uso de IA
+
+Foi utilizada IA (Claude, da Anthropic) como assistente de programação na Sprint 4: apoio na migração dos estilos de CSS puro para Tailwind, na estrutura de rotas públicas/privadas, na extração da lógica para hooks customizados e na integração com as APIs. Todo o código foi revisado, testado e entendido pela equipe.
 
 ## Link do Deploy na Vercel
 
