@@ -55,7 +55,7 @@ function Painel() {
             onExcluir={excluirCaptura}
             onMoverAlbum={moverParaAlbum}
           />
-          <Albuns albuns={albuns} capturas={capturas} onCriar={criarAlbum} />
+          <Albuns albuns={albuns} capturas={capturas} onCriar={criarAlbum} onMoverAlbum={moverParaAlbum} />
           <Historico historico={historico} />
           <Lixeira lixeira={lixeira} onRestaurar={restaurarCaptura} onExcluirDefinitivo={excluirDefinitivo} />
         </div>
