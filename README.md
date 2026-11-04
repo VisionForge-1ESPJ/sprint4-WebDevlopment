@@ -32,14 +32,15 @@ O JOVI Lens é um protótipo de câmera inteligente e contextual. Em vez de um �
 
 ## Tecnologias utilizadas
 
-- [React 19](https://react.dev/)
+- [React 19](https://react.dev/) (componentes funcionais, props, hooks nativos e hooks customizados)
+- [React Router](https://reactrouter.com/) (rotas públicas e privadas)
+- [Tailwind CSS 4](https://tailwindcss.com/) (estilização e responsividade)
 - [Vite](https://vite.dev/) como bundler e servidor de desenvolvimento
 - JavaScript (ES6+)
-- Tailwind CSS 4 e React Router
 - `localStorage` (Web Storage API)
 - `MediaDevices.getUserMedia` (API de câmera do navegador) e `Canvas` para captura/processamento de imagem
-- APIs: [Lorem Picsum](https://picsum.photos/) e [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
-- Deploy na [Vercel](https://vercel.com/)
+- APIs consumidas: [Lorem Picsum](https://picsum.photos/) (API pública de terceiros) e [JSONPlaceholder](https://jsonplaceholder.typicode.com/) (API mockada)
+- Git + GitHub e deploy na [Vercel](https://vercel.com/)
 
 ## Como instalar as dependências
 
@@ -67,6 +68,18 @@ npm run preview
 ```
 
 > Observação sobre a câmera: o navegador só libera acesso à câmera em `localhost` ou em conexões `https` (como o deploy na Vercel). Se a permissão for negada ou não houver câmera disponível, use o botão **"Simular captura"** — o app funciona normalmente sem precisar de webcam.
+
+## Como executar os servidores
+
+O projeto **não possui back-end próprio**: não há servidor para subir além do `npm run dev`. Os dados ficam no `localStorage` do navegador e as APIs consumidas (Lorem Picsum e JSONPlaceholder) são externas e públicas, sem chave de acesso. É necessário ter conexão com a internet para carregar as inspirações e enviar o formulário de contato.
+
+## Rotas da aplicação
+
+| Rota | Tipo | Descrição |
+| --- | --- | --- |
+| `/` | Pública | Landing page: A Solução, Público-Alvo, Galeria, Nossa Equipe e Contato |
+| `/login` | Pública | Login e cadastro |
+| `/app` | Privada | Painel com câmera, inspirações, galeria, álbuns, histórico, estatísticas e lixeira (exige login) |
 
 ## Usuários e senhas de teste
 
